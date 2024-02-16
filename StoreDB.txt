@@ -1,0 +1,32 @@
+mysql> use entreprise;
+Database changed
+mysql> show tables;
+Empty set (0.02 sec)
+
+mysql> create table client(
+    -> id_client int PRIMARY KEY,
+    -> nom varchar(10),
+    -> prenom varchar(10),
+    -> email varchar(20),
+    -> adresse varchar(20),
+    -> telephone int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table produits(
+    -> id_produit int PRIMARY KEY,
+    -> nom varchar(10),
+    -> description varchar(10),
+    -> prix int,
+    -> stock int);
+Query OK, 0 rows affected (0.03 sec)
+
+CREATE TABLE commandes (
+    ->id_commande INT PRIMARY KEY,
+    ->id_client INT,
+    ->date_commande DATE,
+    ->statut ENUM('en cours', 'livrée', 'annulée') DEFAULT 'en cours',
+    ->total DECIMAL(10,2),
+    ->FOREIGN KEY (id_client) REFERENCES clients(id_client),
+    ->CHECK (statut IN ('en cours', 'livrée', 'annulée'))
+);
+Query OK, 0 rows affected (0.03 sec)
